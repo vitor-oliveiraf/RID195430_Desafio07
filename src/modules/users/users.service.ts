@@ -170,9 +170,12 @@ export class UsersService {
   // Remover dados sensíveis do usuário
   private sanitizeUser(user: CreateUserResponseDto) {
     const newUser = new CreateUserResponseDto();
+    newUser.id = user.id;
     newUser.name = user.name;
     newUser.username = user.username;
     newUser.email = user.email;
+    newUser.createdAt = user.createdAt;
+    newUser.updatedAt = user.updatedAt;
     return newUser;
   }
 }
