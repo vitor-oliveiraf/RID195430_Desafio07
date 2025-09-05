@@ -1,0 +1,365 @@
+{
+  "info": {
+    "name": "API de Usuários - NestJS",
+    "description": "Collection completa para testar a API de usuários com todas as operações CRUD",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "🔐 Autenticação",
+      "item": [
+        {
+          "name": "🔑 Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"joaosilva\",\n  \"password\": \"senha123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Faz login e retorna token JWT"
+          },
+          "response": []
+        }
+      ],
+      "description": "Endpoints de autenticação"
+    },
+    {
+      "name": "👤 Usuários",
+      "item": [
+        {
+          "name": "📝 Criar Usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"João Silva\",\n  \"username\": \"joaosilva\",\n  \"email\": \"joao@email.com\",\n  \"password\": \"senha123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/users",
+              "host": ["{{base_url}}"],
+              "path": ["users"]
+            },
+            "description": "Cria um novo usuário com senha criptografada"
+          },
+          "response": []
+        },
+        {
+          "name": "📋 Listar Todos os Usuários",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users",
+              "host": ["{{base_url}}"],
+              "path": ["users"]
+            },
+            "description": "Retorna todos os usuários cadastrados (sem senhas) - ROTA PROTEGIDA"
+          },
+          "response": []
+        },
+        {
+          "name": "🔍 Buscar Usuário por ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users/1",
+              "host": ["{{base_url}}"],
+              "path": ["users", "1"]
+            },
+            "description": "Busca um usuário específico pelo ID - ROTA PROTEGIDA"
+          },
+          "response": []
+        },
+        {
+          "name": "👤 Buscar por Username",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/users/username/joaosilva",
+              "host": ["{{base_url}}"],
+              "path": ["users", "username", "joaosilva"]
+            },
+            "description": "Busca um usuário pelo username"
+          },
+          "response": []
+        },
+        {
+          "name": "📧 Buscar por Email",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/users/email/joao@email.com",
+              "host": ["{{base_url}}"],
+              "path": ["users", "email", "joao@email.com"]
+            },
+            "description": "Busca um usuário pelo email"
+          },
+          "response": []
+        },
+        {
+          "name": "✏️ Atualizar Usuário",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"João Silva Atualizado\",\n  \"email\": \"joao.novo@email.com\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/users/1",
+              "host": ["{{base_url}}"],
+              "path": ["users", "1"]
+            },
+            "description": "Atualiza dados de um usuário existente"
+          },
+          "response": []
+        },
+        {
+          "name": "🗑️ Deletar Usuário",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/users/1",
+              "host": ["{{base_url}}"],
+              "path": ["users", "1"]
+            },
+            "description": "Remove um usuário do sistema"
+          },
+          "response": []
+        },
+        {
+          "name": "🔐 Validar Credenciais",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"joaosilva\",\n  \"password\": \"senha123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/users/validate",
+              "host": ["{{base_url}}"],
+              "path": ["users", "validate"]
+            },
+            "description": "Valida username e senha para login"
+          },
+          "response": []
+        }
+      ],
+      "description": "Todas as operações relacionadas aos usuários"
+    },
+    {
+      "name": "🧪 Testes de Validação",
+      "item": [
+        {
+          "name": "❌ Username Duplicado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Maria Santos\",\n  \"username\": \"joaosilva\",\n  \"email\": \"maria@email.com\",\n  \"password\": \"senha456\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/users",
+              "host": ["{{base_url}}"],
+              "path": ["users"]
+            },
+            "description": "Testa erro de username duplicado"
+          },
+          "response": []
+        },
+        {
+          "name": "❌ Email Duplicado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Pedro Costa\",\n  \"username\": \"pedrocosta\",\n  \"email\": \"joao@email.com\",\n  \"password\": \"senha789\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/users",
+              "host": ["{{base_url}}"],
+              "path": ["users"]
+            },
+            "description": "Testa erro de email duplicado"
+          },
+          "response": []
+        },
+        {
+          "name": "❌ Credenciais Inválidas",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"joaosilva\",\n  \"password\": \"senhaerrada\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/users/validate",
+              "host": ["{{base_url}}"],
+              "path": ["users", "validate"]
+            },
+            "description": "Testa falha na validação de credenciais"
+          },
+          "response": []
+        },
+        {
+          "name": "❌ Usuário Não Encontrado",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/users/999",
+              "host": ["{{base_url}}"],
+              "path": ["users", "999"]
+            },
+            "description": "Testa busca por ID inexistente"
+          },
+          "response": []
+        }
+      ],
+      "description": "Testes para validar o tratamento de erros"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Log da requisição",
+          "console.log('🌐 Requisição para: ' + pm.request.url);",
+          "console.log('📝 Método: ' + pm.request.method);",
+          "if (pm.request.body && pm.request.body.mode === 'raw') {",
+          "    console.log('📦 Body: ' + pm.request.body.raw);",
+          "}"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Testes automáticos",
+          "pm.test('✅ Status Code é válido', function () {",
+          "    pm.expect(pm.response.code).to.be.oneOf([200, 201, 204]);",
+          "});",
+          "",
+          "pm.test('📝 Response tem formato JSON', function () {",
+          "    pm.response.to.have.jsonBody();",
+          "});",
+          "",
+          "pm.test('🔒 Senha não está exposta', function () {",
+          "    const jsonData = pm.response.json();",
+          "    if (jsonData.user) {",
+          "        pm.expect(jsonData.user.password).to.be.undefined;",
+          "    }",
+          "    if (jsonData.users && Array.isArray(jsonData.users)) {",
+          "        jsonData.users.forEach(user => {",
+          "            pm.expect(user.password).to.be.undefined;",
+          "        });",
+          "    }",
+          "});",
+          "",
+          "// Log da resposta",
+          "console.log('📊 Status: ' + pm.response.status);",
+          "console.log('⏱️ Tempo: ' + pm.response.responseTime + 'ms');",
+          "if (pm.response.json()) {",
+          "    console.log('📦 Response: ' + JSON.stringify(pm.response.json(), null, 2));",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000",
+      "type": "string",
+      "description": "URL base da API"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string",
+      "description": "Token JWT para autenticação (preencher após login)"
+    },
+    {
+      "key": "user_id",
+      "value": "1",
+      "type": "string",
+      "description": "ID do usuário para testes"
+    },
+    {
+      "key": "username",
+      "value": "joaosilva",
+      "type": "string",
+      "description": "Username para testes"
+    },
+    {
+      "key": "email",
+      "value": "joao@email.com",
+      "type": "string",
+      "description": "Email para testes"
+    }
+  ]
+}
